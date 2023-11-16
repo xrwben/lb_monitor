@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/sdc-monitor.umd.js"></script>
+  <link rel="icon" href="icon.jpg"/>
+  <link rel="stylesheet" href="../css.css"/>
+  <script src="http://test-contentcenter.woa.com/content-center/lib/contentCenter.js" defer></script>
+  <script src="http://www.b.com/b.js" defer></script>
+  <script src="../dist/sdc-monitor.umd.js" defer></script>
+</head>
+<body>
+  <button class="btn">接口</button>
+  <script>
+    document.querySelector('.btn').addEventListener('click', () => {
+      // console.log(bb)
+      // const formData = new FormData()
+      // formData.append('a', 'aaaaaa')
+      // navigator.sendBeacon('/report', formData)
+      navigator.sendBeacon('/report', JSON.stringify({a: 123}))
+      // fetch('/report', {
+      //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({a: 2222}) // body data type must match "Content-Type" header
+      // }).then(response => {
+      //   return response.json()
+      // }).then(data => {
+      //   console.log(data)
+      // })
+    })
+  </script>
+  <script>
+    SdcMonitor.init({
+      url: 'http://localhost:3000/report',
+      appId: 'mooc',
+      extends: {
+        
+      }
+    })
+  </script>
+
+  <script>
+    // js错误
+    console.log(a)
+
+    // promise错误
+    let p1 = Promise.reject('promise reject')
+    let p2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(1)
+      }, 3000)
+    }).catch(err => {
+      console.log(err)
+    })
+
+    // async、await错误
+    let p3 = () => {
+      new Promise((resolve, reject) => {
+        abc()
+      })
+    } 
+    (async function () {
+      await p3()
+    })()
+
+  </script>
+
+  <!-- 图片资源加载错误 -->
+  <img src="../a.png" alt="">
+  <img src="" alt="">
+
+</body>
+</html>

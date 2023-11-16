@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/sdc-monitor.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+  <!-- <script src="../b.js" defer></script> -->
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+  <!-- vue2 -->
+  <div id="app">
+    <!-- <img src="../pic.jpg" alt=""> -->
+    <!-- <img :src="imgSrc" alt="" @error="loadError"> -->
+    <el-image fit="fill" :src="imgSrc">
+      <div slot="error" class="image-slot">
+        <i class="el-icon-picture-outline"></i>
+        加载失败
+      </div>
+    </el-image>
+  </div>
+  <script>
+    SdcMonitor.init({
+      url: 'http://localhost:3000/report',
+      appId: 'sdc',
+      vue: Vue,
+      extends: {}
+    })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+        imgSrc: ''
+      },
+      mounted () {
+        this.getImage()
+        // console.log(abc)
+      },
+      methods: {
+        getImage () {
+          setTimeout(() => {
+            this.imgSrc = 'https://video-learn.woa.com/mooc/default/2020/07-27/15125467db8c384068.png'
+          }, 3000)
+        },
+        loadError () {
+          console.log('加载错误')
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
